@@ -16,31 +16,55 @@ const Navbar = () => {
         {/* Desktop Links */}
         <ul className="hidden md:flex items-center space-x-6 text-gray-700 font-medium">
           <li>
-            <Link to="/">Home</Link>
+            <Link
+              to="/"
+              className="relative px-2 py-1 hover:underline hover:bg-blue-100 rounded transition"
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link
+              to="/about"
+              className="relative px-2 py-1 hover:underline hover:bg-blue-100 rounded transition"
+            >
+              About
+            </Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link
+              to="/contact"
+              className="relative px-2 py-1 hover:underline hover:bg-blue-100 rounded transition"
+            >
+              Contact
+            </Link>
           </li>
         </ul>
 
         {/* Right buttons */}
         <div className="hidden md:flex items-center space-x-4">
           {user ? (
-            <>
-              <span className="text-gray-700">{user.email}</span>
-              <Button variant="ghost" onClick={signOut}>
-                Sign Out
-              </Button>
-            </>
+            <Button
+              variant="ghost"
+              onClick={signOut}
+              className="hover:underline hover:bg-blue-100 transition"
+            >
+              Sign Out
+            </Button>
           ) : (
             <>
-              <Button variant="ghost" onClick={() => navigate("/signin")}>
+              <Button
+                variant="ghost"
+                onClick={() => navigate("/signin")}
+                className="hover:underline hover:bg-blue-100 transition"
+              >
                 Sign In
               </Button>
-              <Button variant="default" onClick={() => navigate("/signin")}>
+              <Button
+                variant="default"
+                onClick={() => navigate("/signin")}
+                className="hover:underline hover:bg-blue-100 transition"
+              >
                 Get Started
               </Button>
             </>
@@ -60,17 +84,29 @@ const Navbar = () => {
         <div className="md:hidden bg-white border-t border-gray-200 shadow-md">
           <ul className="flex flex-col space-y-2 p-4">
             <li>
-              <Link to="/" onClick={() => setIsOpen(false)}>
+              <Link
+                to="/"
+                onClick={() => setIsOpen(false)}
+                className="px-2 py-1 hover:underline hover:bg-blue-100 rounded transition"
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/about" onClick={() => setIsOpen(false)}>
+              <Link
+                to="/about"
+                onClick={() => setIsOpen(false)}
+                className="px-2 py-1 hover:underline hover:bg-blue-100 rounded transition"
+              >
                 About
               </Link>
             </li>
             <li>
-              <Link to="/contact" onClick={() => setIsOpen(false)}>
+              <Link
+                to="/contact"
+                onClick={() => setIsOpen(false)}
+                className="px-2 py-1 hover:underline hover:bg-blue-100 rounded transition"
+              >
                 Contact
               </Link>
             </li>
@@ -82,7 +118,7 @@ const Navbar = () => {
                     signOut();
                     setIsOpen(false);
                   }}
-                  className="w-full"
+                  className="w-full hover:underline hover:bg-blue-100 transition"
                 >
                   Sign Out
                 </Button>
@@ -94,7 +130,7 @@ const Navbar = () => {
                       navigate("/signin");
                       setIsOpen(false);
                     }}
-                    className="w-full mb-2"
+                    className="w-full mb-2 hover:underline hover:bg-blue-100 transition"
                   >
                     Sign In
                   </Button>
@@ -104,7 +140,7 @@ const Navbar = () => {
                       navigate("/signin");
                       setIsOpen(false);
                     }}
-                    className="w-full"
+                    className="w-full hover:underline hover:bg-blue-100 transition"
                   >
                     Get Started
                   </Button>

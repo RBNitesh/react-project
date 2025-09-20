@@ -26,16 +26,50 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  const signUp = (email, password) => supabase.auth.signUp({ email, password });
+  // ✅ Sign Up → also insert into "profiles" table
+  const signUp = async (email, password, metadata = {}) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: metadata }, // still store in user_metadata
+    });
+
+    if (error) return { data, error };
+
+    // If signup succeeded, insert into profiles table
+    if (data?.user) {
+      await supabase.from("profiles").insert({
+        id: data.user.id,
+        email,
+        age: metadata.age,
+        gender: metadata.gender,
+      });
+    }
+
+    return { data, error };
+  };
+
+  // ✅ Sign In
   const signIn = (email, password) =>
     supabase.auth.signInWithPassword({ email, password });
+
+  // ✅ Sign Out
   const signOut = async () => {
     await supabase.auth.signOut();
     navigate("/");
   };
 
+  // ✅ Social login (Google, Facebook, etc.)
+  const signInWithProvider = (provider) =>
+    supabase.auth.signInWithOAuth({
+      provider,
+      options: { redirectTo: window.location.origin },
+    });
+
   return (
-    <AuthContext.Provider value={{ user, signUp, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user, signUp, signIn, signOut, signInWithProvider }}
+    >
       {children}
     </AuthContext.Provider>
   );
